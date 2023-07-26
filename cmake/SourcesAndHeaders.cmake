@@ -12,5 +12,6 @@ set(headers
 )
 
 set(test_sources
-  src/reflect_test.cpp
+  src/function_test.cpp
+  src/include_test.cpp
 )
