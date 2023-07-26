@@ -43,7 +43,13 @@ foreach(file ${test_sources})
   endif()
 
   if(${CMAKE_PROJECT_NAME}_USE_GTEST)
-    find_package(GTest REQUIRED)
+    # On windows GTest is called gtest
+    if(WIN32)
+      find_package(gtest REQUIRED)
+
+    else()
+      find_package(GTest REQUIRED)
+    endif()
 
     if(${CMAKE_PROJECT_NAME}_USE_GOOGLE_MOCK)
       set(GOOGLE_MOCK_LIBRARIES GTest::gmock GTest::gmock_main)
