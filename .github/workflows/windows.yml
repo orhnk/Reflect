@@ -17,7 +17,7 @@ jobs:
     if: "!contains(github.event.head_commit.message, '[skip ci]') && !contains(github.event.head_commit.message, '[ci skip]')"
 
     steps:
-      - uses: actions/checkout@v2
+    - uses: actions/checkout@v2
 
     - name: cache dependencies
       uses: actions/cache@v2
@@ -25,12 +25,13 @@ jobs:
       with:
         path: ${{env.INSTALL_LOCATION}}
         key: ${{runner.os}}-dependencies
+
     - name: Install gtest
       uses: MarkusJx/googletest-installer@v1.1
 
     - name: configure
       run: cmake -Bbuild -DCMAKE_INSTALL_PREFIX="$HOME/$env:INSTALL_LOCATION"
-
+      
     - name: build
       run: cmake --build build --config "$env:BUILD_TYPE" -j4
 

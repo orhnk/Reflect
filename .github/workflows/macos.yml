@@ -17,8 +17,8 @@ jobs:
     if: "!contains(github.event.head_commit.message, '[skip ci]') && !contains(github.event.head_commit.message, '[ci skip]')"
 
     steps:
-      - uses: actions/checkout@v2
-
+    - uses: actions/checkout@v2
+      
     - name: cache dependencies
       uses: actions/cache@v2
       id: cache
@@ -31,7 +31,7 @@ jobs:
 
     - name: configure
       run: cmake -Bbuild -DCMAKE_INSTALL_PREFIX=$GITHUB_WORKSPACE/$INSTALL_LOCATION
-
+      
     - name: build
       run: cmake --build build --config $BUILD_TYPE -j4
 
