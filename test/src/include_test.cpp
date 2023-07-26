@@ -52,25 +52,21 @@ const std::string one_tab = R"(
 TEST(test_include, function_search_one_space)
 {
     ASSERT_EQ(test_regex_function_search(one_space), "#include <iostream>");
-    EXPECT_TRUE(true);
 }
 
 TEST(test_include, function_search_two_tabs)
 {
     ASSERT_EQ(test_regex_function_search(two_tabs), "#include    <catch2/catch.cpp>");
-    EXPECT_TRUE(true);
 }
 
 TEST(test_include, function_search_cluttered)
 {
     ASSERT_EQ(test_regex_function_search(cluttered), "#include       <gtest/gtest.h>");
-    EXPECT_TRUE(true);
 }
 
 TEST(test_include, function_search_one_tab)
 {
     ASSERT_EQ(test_regex_function_search(one_tab), "#include  <vector>");
-    EXPECT_TRUE(true);
 }
 
 int main(int argc, char** argv)
