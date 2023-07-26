@@ -58,7 +58,7 @@ namespace reflect
         inline const auto header_guard = R"(#ifndef\s+(\w+)\s+#define\s+\1)";
         inline const auto namespace_ = R"(namespace\s+(\w+)\s+{)";
         inline const auto include = R"(#include\s+<(.+)>)";
-        inline const auto function = R"(\b([\w:<>]+)\s+(\w+)\s*\([^)]*\))"; // HACK: regex uses [\w:<>]+ to match std::vector<int> like literals
+        inline const auto function = R"(\b([\w:<>]+)\s+[\w:<>]+\s*\(\s*([^\)]*)\s*\))"; // HACK: regex uses [\w:<>]+ to match std::vector<int> like literals
         inline const auto global_variable = R"((\w+)\s+(\w+)\s*;)";
         inline const auto variable = R"((\w+)\s+(\w+)\s*;)";
         inline const auto comment = "//(.+)";
