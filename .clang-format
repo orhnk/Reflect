@@ -21,12 +21,12 @@ AlwaysBreakTemplateDeclarations: Yes
 BinPackArguments: false
 BinPackParameters: false
 BreakBeforeBinaryOperators: NonAssignment
-BreakBeforeBraces: Attach
+BreakBeforeBraces: Allman
 BreakBeforeTernaryOperators: true
 BreakConstructorInitializers: AfterColon
 BreakInheritanceList: AfterColon
 BreakStringLiterals: false
-ColumnLimit: 80
+ColumnLimit: 0 # CHANGED: 80
 CompactNamespaces: false
 ConstructorInitializerAllOnOneLineOrOnePerLine: true
 ConstructorInitializerIndentWidth: 4
@@ -53,7 +53,7 @@ IncludeCategories:
     SortPriority:    0
     CaseSensitive:   false
 IncludeIsMainRegex: '([-_](test|unittest))?$'
-IndentCaseLabels: true
+IndentCaseLabels: false # CHANGED: true
 IndentPPDirectives: BeforeHash
 IndentWidth: 4
 IndentWrappedFunctionNames: false
