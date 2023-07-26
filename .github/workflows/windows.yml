@@ -41,7 +41,8 @@ jobs:
     - name: Export CMAKE_PREFIX_PATH on Windows
       shell: bash
       if: runner.os == 'Windows'
-      run: echo '::set-env name=CMAKE_PREFIX_PATH::C:/Program Files (x86)/googletest-distribution'
+      run: echo "NOW=v$(date +'%Y%m%d.%H%M%S')" >> $GITHUB_ENV && \
+        echo '::set-env name=CMAKE_PREFIX_PATH::C:/Program Files (x86)/googletest-distribution'
 
     - name: Checkout
       uses: actions/checkout@v2
