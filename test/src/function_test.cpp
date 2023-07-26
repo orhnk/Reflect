@@ -60,28 +60,68 @@ const std::string vector_int_add = R"(
         }
     )";
 
+const std::string class_fn_foo_foo = R"(
+        void Foo::foo(int some, char* param) {
+            // Function without parameters
+        }
+    )";
+
+const std::string multiline_class_fn_foo_foo = R"(
+        void Foo::foo(
+            int a,
+            int b
+        ) {
+            return a + b;
+        }
+    )";
+
 // TODO
-const std::string template_int_add = R"(
+// These are not going to get moved to the .cpp file because of the template
+// So Unmatch thsese! ^template
+const std::string neg_template_int_add = R"(
         template <typename T>
         T add(T a, T b) {
             return a + b;
         }
     )";
 
-TEST(TmpAddTest, CheckValues)
+TEST(test_fn, simple)
 {
     ASSERT_EQ(test_regex_function_search(int_add), "int add(int a, int b)");
-    EXPECT_TRUE(true);
-
-    ASSERT_EQ(test_regex_function_search(double_divide), "double divide(double a, double b)");
-    EXPECT_TRUE(true);
-
-    ASSERT_EQ(test_regex_function_search(void_someFunction), "void someFunction()");
-    EXPECT_TRUE(true);
-
-    ASSERT_EQ(test_regex_function_search(vector_int_add), "std::vector<int> add(std::vector<int> a, std::vector<int> b)");
-    EXPECT_TRUE(true);
 }
+
+TEST(test_fn, simple_long)
+{
+    ASSERT_EQ(test_regex_function_search(double_divide), "double divide(double a, double b)");
+}
+
+TEST(test_fn, simple_no_params)
+{
+    ASSERT_EQ(test_regex_function_search(void_someFunction), "void someFunction()");
+}
+
+TEST(test_fn, complex_types)
+{
+    ASSERT_EQ(test_regex_function_search(vector_int_add), "std::vector<int> add(std::vector<int> a, std::vector<int> b)");
+}
+
+TEST(test_fn, complex_class_types)
+{
+    ASSERT_EQ(test_regex_function_search(class_fn_foo_foo), "void Foo::foo(int some, char* param)");
+}
+
+TEST(test_fn, class_complex_multiline)
+{
+    ASSERT_EQ(test_regex_function_search(multiline_class_fn_foo_foo),
+    R"(void Foo::foo(
+            int a,
+            int b
+        ))");
+}
+
+// TEST(test_fn_simple, CheckValues)
+// {
+// }
 
 int main(int argc, char** argv)
 {
