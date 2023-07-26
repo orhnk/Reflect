@@ -58,7 +58,12 @@ arg=${arg:2}
 
 echo $arg
 
+# in case tests, build first
+if [ "$arg" = "test" ]; then
+  arg="all test"
+fi
+
 # Build process
-cd build || exit
-cmake ..
-make $arg
+cd build  || exit
+cmake ..  || exit
+make $arg || exit
