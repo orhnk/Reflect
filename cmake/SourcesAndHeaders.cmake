@@ -1,5 +1,6 @@
 set(sources
-    src/reflect.cpp
+    # src/reflect.hpp
+    src/regex.cpp
 )
 
 set(exe_sources
@@ -8,7 +9,8 @@ set(exe_sources
 )
 
 set(headers
-    include/reflect/reflect.hpp
+    # include/reflect/reflect.hpp
+    include/reflect/regex_utils.hpp
 )
 
 set(test_sources
