@@ -64,6 +64,9 @@ if [ "$arg" = "test" ]; then
 fi
 
 # Build process
+if [ ! -d "build" ]; then
+  mkdir build
+fi
 cd build  || exit
 cmake ..  || exit
 make $arg || exit
