@@ -16,4 +16,5 @@ set(headers
 set(test_sources
   src/function_test.cpp
   src/include_test.cpp
+  src/enum_test.cpp
 )
