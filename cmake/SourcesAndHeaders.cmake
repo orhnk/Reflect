@@ -18,4 +18,5 @@ set(test_sources
   src/include_test.cpp
   src/enum_test.cpp
   src/using_test.cpp
+  src/using_alias_test.cpp
 )
