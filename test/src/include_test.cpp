@@ -10,7 +10,7 @@
 
 #include "reflect/regex_utils.hpp"
 
-std::string test_regex_function_search(const std::string& code)
+std::string test_regex_enum_search(const std::string& code)
 {
     using std::cerr;
     using std::regex;
@@ -34,39 +34,49 @@ std::string test_regex_function_search(const std::string& code)
 }
 
 const std::string one_space = R"(
+        // Distraction!!! #include
         #include <iostream>
+        // Distraction!!! #include
     )";
 
 const std::string two_tabs = R"(
+        // Distraction!!! #include
+        // Distraction!!! #include
         #include    <catch2/catch.cpp>
+        // Distraction!!! #include
     )";
 
 const std::string cluttered = R"(
+        // Distraction!!! #include
         #include       <gtest/gtest.h>
+        // Distraction!!! #include
+        // Distraction!!! #include
     )";
 
 const std::string one_tab = R"(
+        // Distraction!!! #include
         #include  <vector>
+        // Distraction!!! #include
     )";
 
 TEST(test_include, function_search_one_space)
 {
-    ASSERT_EQ(test_regex_function_search(one_space), "#include <iostream>");
+    ASSERT_EQ(test_regex_enum_search(one_space), "#include <iostream>");
 }
 
 TEST(test_include, function_search_two_tabs)
 {
-    ASSERT_EQ(test_regex_function_search(two_tabs), "#include    <catch2/catch.cpp>");
+    ASSERT_EQ(test_regex_enum_search(two_tabs), "#include    <catch2/catch.cpp>");
 }
 
 TEST(test_include, function_search_cluttered)
 {
-    ASSERT_EQ(test_regex_function_search(cluttered), "#include       <gtest/gtest.h>");
+    ASSERT_EQ(test_regex_enum_search(cluttered), "#include       <gtest/gtest.h>");
 }
 
 TEST(test_include, function_search_one_tab)
 {
-    ASSERT_EQ(test_regex_function_search(one_tab), "#include  <vector>");
+    ASSERT_EQ(test_regex_enum_search(one_tab), "#include  <vector>");
 }
 
 int main(int argc, char** argv)
