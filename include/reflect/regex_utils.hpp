@@ -63,7 +63,9 @@ namespace reflect
         // <> are not supported, "I don't a use case so."
         inline const auto using_ = R"(\busing\s+([\w:]+\s*(?:,\s*[\w:]+\s*)*);)";
 
-        inline const auto using_alias = R"(\btypedef\s+([\w:<>]+)\s+([\w:<>]+);)";
+        // NOTE: let me now are there any other features that I skipped
+        inline const auto using_alias = R"(\busing\s*\w+\s*=\s*[\w<>:]+;)";
+
         inline const auto typedef_ = R"(typedef\s+([\w:<>]+)\s+([\w:<>]+);)";
         inline const auto using_namespace = R"(\benum(\s+class|\s+struct)?\s+(\w+)\s*\{[^{}]*\})";
         inline const auto header_guard = R"(#ifndef\s+(\w+)\s+#define\s+\1)";
