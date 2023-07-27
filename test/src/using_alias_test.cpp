@@ -19,7 +19,7 @@ std::string test_regex_using_alias_search(const std::string& code)
 
     // Input code containing function signatures
     // Regular expression to match function signatures
-    const regex using_alias_regex(reflect::utils::using_alias_);
+    const regex using_alias_regex(reflect::utils::using_alias);
     // Convert into regex
 
     // Searching for function signatures in the code
@@ -54,6 +54,10 @@ const std::string using_alias_long_template_bar = R"(
         using foo = std::very::long::destination::bar<size_t>;
     )";
 
+const std::string using_alias_long_no_space_template_bar = R"(
+        using foo=std::very::long::destination::bar<size_t>;
+    )";
+
 TEST(test_using_alias, using_alias_bar)
 {
     ASSERT_EQ(test_regex_using_alias_search(using_alias_bar), R"(using foo = std::bar;)");
@@ -72,6 +76,11 @@ TEST(test_using_alias, using_alias_long_bar)
 TEST(test_using_alias, using_alias_long_template_bar)
 {
     ASSERT_EQ(test_regex_using_alias_search(using_alias_long_template_bar), R"(using foo = std::very::long::destination::bar<size_t>;)");
+}
+
+TEST(test_using_alias, using_alias_long_no_space_template_bar)
+{
+    ASSERT_EQ(test_regex_using_alias_search(using_alias_long_no_space_template_bar), R"(using foo=std::very::long::destination::bar<size_t>;)");
 }
 
 int main(int argc, char** argv)
