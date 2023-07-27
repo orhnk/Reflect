@@ -31,6 +31,6 @@ include: Refresh the corresponding header when the source file gets modified)
 I may try to make it more generalized on demand but currently I develop It for
 my personal use
 
-
 ## LICENSE
+
 This project is distributed under MIT LICENSE see `LICENSE` for details
