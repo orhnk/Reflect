@@ -10,7 +10,7 @@ set(exe_sources
 
 set(headers
     # include/reflect/reflect.hpp
-    include/reflect/regex_utils.hpp
+    include/reflect/regex.hpp
 )
 
 set(test_sources
@@ -20,4 +20,5 @@ set(test_sources
   src/using_test.cpp
   src/using_alias_test.cpp
   src/using_namespace_test.cpp
+  src/typedef_test.cpp
 )
