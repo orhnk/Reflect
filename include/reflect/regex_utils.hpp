@@ -66,8 +66,10 @@ namespace reflect
         // NOTE: let me now are there any other features that I skipped
         inline const auto using_alias = R"(\busing\s*\w+\s*=\s*[\w<>:]+;)";
 
+        // NOTE: let me now are there any other features that I skipped
+        inline const auto using_namespace = R"(\busing\s+namespace\s+[\w:]+\s*;)";
+
         inline const auto typedef_ = R"(typedef\s+([\w:<>]+)\s+([\w:<>]+);)";
-        inline const auto using_namespace = R"(\benum(\s+class|\s+struct)?\s+(\w+)\s*\{[^{}]*\})";
         inline const auto header_guard = R"(#ifndef\s+(\w+)\s+#define\s+\1)";
         inline const auto namespace_ = R"(namespace\s+(\w+)\s+{)";
         inline const auto global_variable = R"((\w+)\s+(\w+)\s*;)";
