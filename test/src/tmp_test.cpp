@@ -8,7 +8,7 @@
 #include <string>
 #include <vector>
 
-#include "reflect/regex_utils.hpp"
+#include "reflect/regex.hpp"
 
 std::string test_regex_<tmp>_search(const std::string& code)
 {

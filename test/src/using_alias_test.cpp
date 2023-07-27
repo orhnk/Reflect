@@ -8,7 +8,7 @@
 #include <string>
 #include <vector>
 
-#include "reflect/regex_utils.hpp"
+#include "reflect/regex.hpp"
 
 std::string test_regex_using_alias_search(const std::string& code)
 {
@@ -19,7 +19,7 @@ std::string test_regex_using_alias_search(const std::string& code)
 
     // Input code containing function signatures
     // Regular expression to match function signatures
-    const regex using_alias_regex(reflect::utils::using_alias);
+    const regex using_alias_regex(reflect::utils::using_);
     // Convert into regex
 
     // Searching for function signatures in the code

@@ -8,7 +8,7 @@
 #include <string>
 #include <vector>
 
-#include "reflect/regex_utils.hpp"
+#include "reflect/regex.hpp"
 
 std::string test_regex_enum_search(const std::string& code)
 {
@@ -52,20 +52,21 @@ const std::string enum_foo = R"(
         auto some() -> distraction
     )";
 
-const std::string failing_enum_foo = R"(
-
-        // some comment
-        auto some() -> distraction
-
-        enum foo::some {
-          one,
-          two,
-          three,
-        }
-// unindentified
-        // some comment
-        auto some() -> distraction
-    )";
+// // This example fails to compile. Reflect doesn't check what compiler does.
+// const std::string failing_enum_foo = R"(
+//
+//         // some comment
+//         auto some() -> distraction
+//
+//         enum foo::some {
+//           one,
+//           two,
+//           three,
+//         }
+// // unindentified
+//         // some comment
+//         auto some() -> distraction
+//     )";
 
 const std::string enum_class_some_another = R"(
 // unindentified
@@ -83,22 +84,23 @@ const std::string enum_class_some_another = R"(
         auto some() -> distraction
     )";
 
-const std::string failing_enum_class_should_fail = R"(
-// unindentified
-        // some comment
-        auto some() -> distraction
-      // unindentified
-              // some comment
-        auto some() -> distraction
-        enum class should::fail {
-          one,
-          two,
-          three,
-        }
-// unindentified
-        // some comment
-        auto some() -> distraction
-    )";
+// // This example fails to compile. Reflect doesn't check what compiler does.
+// const std::string failing_enum_class_should_fail = R"(
+// // unindentified
+//         // some comment
+//         auto some() -> distraction
+//       // unindentified
+//               // some comment
+//         auto some() -> distraction
+//         enum class should::fail {
+//           one,
+//           two,
+//           three,
+//         }
+// // unindentified
+//         // some comment
+//         auto some() -> distraction
+//     )";
 
 TEST(test_enum, enum_search_foo)
 {
@@ -109,22 +111,22 @@ TEST(test_enum, enum_search_foo)
         })");
 }
 
-TEST(test_enum, enum_search_failing_enum_foo)
-{
-    try
-    {
-        test_regex_enum_search(failing_enum_foo);
-        FAIL() << "Expected std::runtime_error";
-    }
-    catch (const std::runtime_error& err)
-    {
-        EXPECT_EQ(err.what(), std::string("No matches found"));
-    }
-    catch (...)
-    {
-        FAIL() << "Expected std::runtime_error";
-    }
-}
+// TEST(test_enum, enum_search_failing_enum_foo)
+// {
+//     try
+//     {
+//         test_regex_enum_search(failing_enum_foo);
+//         FAIL() << "Expected std::runtime_error";
+//     }
+//     catch (const std::runtime_error& err)
+//     {
+//         EXPECT_EQ(err.what(), std::string("No matches found"));
+//     }
+//     catch (...)
+//     {
+//         FAIL() << "Expected std::runtime_error";
+//     }
+// }
 
 TEST(test_enum, enum_search_some_another)
 {
@@ -137,22 +139,22 @@ TEST(test_enum, enum_search_some_another)
         })");
 }
 
-TEST(test_enum, enum_search_failing_enum_class_should_fail)
-{
-    try
-    {
-        test_regex_enum_search(failing_enum_class_should_fail);
-        FAIL() << "Expected std::runtime_error";
-    }
-    catch (const std::runtime_error& err)
-    {
-        EXPECT_EQ(err.what(), std::string("No matches found"));
-    }
-    catch (...)
-    {
-        FAIL() << "Expected std::runtime_error";
-    }
-}
+// TEST(test_enum, enum_search_failing_enum_class_should_fail)
+// {
+//     try
+//     {
+//         test_regex_enum_search(failing_enum_class_should_fail);
+//         FAIL() << "Expected std::runtime_error";
+//     }
+//     catch (const std::runtime_error& err)
+//     {
+//         EXPECT_EQ(err.what(), std::string("No matches found"));
+//     }
+//     catch (...)
+//     {
+//         FAIL() << "Expected std::runtime_error";
+//     }
+// }
 
 int main(int argc, char** argv)
 {

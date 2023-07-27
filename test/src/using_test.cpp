@@ -9,7 +9,7 @@
 #include <string>
 #include <vector>
 
-#include "reflect/regex_utils.hpp"
+#include "reflect/regex.hpp"
 
 std::string test_regex_using_search(const std::string& code)
 {

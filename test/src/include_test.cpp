@@ -8,7 +8,7 @@
 #include <string>
 #include <vector>
 
-#include "reflect/regex_utils.hpp"
+#include "reflect/regex.hpp"
 
 std::string test_regex_enum_search(const std::string& code)
 {
@@ -19,7 +19,7 @@ std::string test_regex_enum_search(const std::string& code)
 
     // Input code containing function signatures
     // Regular expression to match function signatures
-    const regex functionSignatureRegex(reflect::utils::include);
+    const regex functionSignatureRegex(reflect::utils::preprocessor_directives);
     // Convert into regex
 
     // Searching for function signatures in the code
