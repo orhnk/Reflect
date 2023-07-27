@@ -5,12 +5,6 @@
 
 namespace reflect
 {
-    namespace
-    {
-        using std::vector;
-        using std::string;
-    }
-
     namespace search
     {
         /// @brief Finds all matches of a regex pattern in a string
@@ -19,7 +13,7 @@ namespace reflect
         /// @return A vector of strings containing all matches
         /// @note This function is not recursive
         inline auto find_matches(const std::string& input, const std::regex& pattern)
-            -> vector<string>
+            -> std::vector<std::string>
         {
             std::vector<std::string> match_buf;
             std::smatch matches;
@@ -55,17 +49,21 @@ namespace reflect
 
         /// @brief Regex matching constants to find out things for the header file
         /// @note These are all regex literals
+        inline const auto include = R"(#include\s+<(.+)>)";
+        inline const auto function = R"(\b([\w:<>]+)\s+[\w:<>]+\s*\(\s*([^\)]*)\s*\))";  // HACK: regex uses [\w:<>]+ to match std::vector<int> like literals could remove <, > support to drop templates
+        inline const auto enum_ = R"(\benum(\s+class|\s+struct)?\s+(\w+)\s*\{[^{}]*\})"; // these may give false positives when it comes to compound statements, functions, etc. (curly braces)
+        inline const auto function_declaration = R"(\b([\w:<>]+)\s+[\w:<>]+\s*\(\s*([^\)]*)\s*\);)";
+        inline const auto typedef_ = R"(typedef\s+([\w:<>]+)\s+([\w:<>]+);)";
+        inline const auto using_ = R"(using\s+([\w:<>]+)\s*=\s*([\w:<>]+);)";
+        inline const auto using_namespace = R"(using\s+namespace\s+([\w:<>]+);)";
         inline const auto header_guard = R"(#ifndef\s+(\w+)\s+#define\s+\1)";
         inline const auto namespace_ = R"(namespace\s+(\w+)\s+{)";
-        inline const auto include = R"(#include\s+<(.+)>)";
-        inline const auto function = R"(\b([\w:<>]+)\s+[\w:<>]+\s*\(\s*([^\)]*)\s*\))"; // HACK: regex uses [\w:<>]+ to match std::vector<int> like literals
         inline const auto global_variable = R"((\w+)\s+(\w+)\s*;)";
         inline const auto variable = R"((\w+)\s+(\w+)\s*;)";
         inline const auto comment = "//(.+)";
         inline const auto macro = R"(#define\s+(\w+)\s+(.+))";
         inline const auto class_ = R"(class\s+(\w+)\s*{)";
         inline const auto struct_ = R"(struct\s+(\w+)\s*{)";
-        inline const auto enum_ = R"(enum\s+(\w+)\s*{)";
         inline const auto enum_class = R"(enum\s+class\s+(\w+)\s*{)";
         inline const auto enum_class_struct = R"(enum\s+class\s+(\w+)\s*{)";
 
