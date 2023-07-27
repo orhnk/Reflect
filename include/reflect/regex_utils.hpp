@@ -50,12 +50,22 @@ namespace reflect
         /// @brief Regex matching constants to find out things for the header file
         /// @note These are all regex literals
         inline const auto include = R"(#include\s+<(.+)>)";
-        inline const auto function = R"(\b([\w:<>]+)\s+[\w:<>]+\s*\(\s*([^\)]*)\s*\))";  // HACK: regex uses [\w:<>]+ to match std::vector<int> like literals could remove <, > support to drop templates
-        inline const auto enum_ = R"(\benum(\s+class|\s+struct)?\s+(\w+)\s*\{[^{}]*\})"; // these may give false positives when it comes to compound statements, functions, etc. (curly braces)
-        inline const auto function_declaration = R"(\b([\w:<>]+)\s+[\w:<>]+\s*\(\s*([^\)]*)\s*\);)";
+
+        // HACK: regex uses [\w:<>]+ to match std::vector<int> like literals could remove <, > support to drop templates
+        // NOTE: This regex catches function prototypes, function definitions, and function declarations
+        inline const auto function = R"(\b([\w:<>]+)\s+[\w:<>]+\s*\(\s*([^\)]*)\s*\))";
+
+        // these may give false positives when it comes to compound statements, functions, etc. (curly braces)
+        inline const auto enum_ = R"(\benum(\s+class|\s+struct)?\s+(\w+)\s*\{[^{}]*\})";
+
+        // NOTE: some expressions does not include trailing semicolon, so regexes which
+        // catches them will probably get removed in the future because of the code quality
+        // <> are not supported, "I don't a use case so."
+        inline const auto using_ = R"(\busing\s+([\w:]+\s*(?:,\s*[\w:]+\s*)*);)";
+
+        inline const auto using_alias = R"(\btypedef\s+([\w:<>]+)\s+([\w:<>]+);)";
         inline const auto typedef_ = R"(typedef\s+([\w:<>]+)\s+([\w:<>]+);)";
-        inline const auto using_ = R"(using\s+([\w:<>]+)\s*=\s*([\w:<>]+);)";
-        inline const auto using_namespace = R"(using\s+namespace\s+([\w:<>]+);)";
+        inline const auto using_namespace = R"(\benum(\s+class|\s+struct)?\s+(\w+)\s*\{[^{}]*\})";
         inline const auto header_guard = R"(#ifndef\s+(\w+)\s+#define\s+\1)";
         inline const auto namespace_ = R"(namespace\s+(\w+)\s+{)";
         inline const auto global_variable = R"((\w+)\s+(\w+)\s*;)";
