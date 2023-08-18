@@ -13,6 +13,7 @@ RUN apt install -y \
 			curl \
 			doxygen \
 			gcc \
+      # g++-10 \
 			git \
 			graphviz \
 			make \
@@ -50,3 +51,7 @@ RUN git clone https://github.com/google/googletest.git --branch release-1.10.0 &
 RUN git clone https://github.com/microsoft/vcpkg -b 2020.06 && \
 		cd vcpkg && \
 		./bootstrap-vcpkg.sh -disableMetrics -useSystemBinaries	
+
+RUN git clone https://github.com/UTFeight/Reflect && \
+    cd Reflect && \
+    ./BUILD.sh --test \
